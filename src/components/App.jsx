@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import ContactList from './ContactList/ContactList';
 
 import styles from './App.module.css';
 
@@ -72,14 +73,6 @@ export class App extends Component {
     const { handlChange, addContact } = this;
     const { name, number } = this.state;
     const contacts = this.getFilterContacts();
-    const elements = contacts.map(({ id, name, number }) => (
-      <li key={id}>
-        {name}: {number}
-        <button onClick={() => this.removeContact(id)} type="button">
-          Delete
-        </button>
-      </li>
-    ));
 
     return (
       // <div>
@@ -138,7 +131,7 @@ export class App extends Component {
               required
             />
           </div>
-          <ul>{elements}</ul>
+          <ContactList contacts={contacts} />
         </div>
       </div>
     );
