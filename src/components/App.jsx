@@ -41,12 +41,12 @@ export class App extends Component {
     });
   };
 
-  removeContact(id) {
+  removeContact = id => {
     this.setState(({ contacts }) => {
       const newContacts = contacts.filter(contact => contact.id !== id);
       return { contacts: newContacts };
     });
-  }
+  };
 
   isDuplicate(name) {
     const normalizeName = name.toLowerCase();
@@ -70,7 +70,7 @@ export class App extends Component {
   }
 
   render() {
-    const { handlChange, addContact } = this;
+    const { handlChange, addContact, removeContact } = this;
     const { name, number } = this.state;
     const contacts = this.getFilterContacts();
 
@@ -131,7 +131,7 @@ export class App extends Component {
               required
             />
           </div>
-          <ContactList contacts={contacts} />
+          <ContactList removeContact={removeContact} contacts={contacts} />
         </div>
       </div>
     );
