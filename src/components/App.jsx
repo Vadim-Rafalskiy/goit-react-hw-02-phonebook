@@ -1,42 +1,51 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+
 import ContactList from './ContactList/ContactList';
+import PhoneBookFilter from './PhoneBookFilter/PhoneBookFilter';
+import PhoneBookForm from './PhoneBookForm/PhoneBookForm';
+import contacts from './contacts';
 
 import styles from './App.module.css';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [...contacts],
     filter: '',
-    name: '',
-    number: '',
+    // name: '',
+    // number: '',
   };
 
-  handlChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
+  // handlChange = ({ target }) => {
+  //   const { name, value } = target;
+  //   this.setState({
+  //     [name]: value,
+  //   });
+  // };
+
+  handlFilter = ({ target }) => {
+    this.setState({ filter: target.value });
   };
 
-  addContact = e => {
-    e.preventDefault();
-    const { name } = this.state;
+  addContact = ({ name, number }) => {
+    // e.preventDefault();
+    // const { name } = this.state;
     if (this.isDuplicate(name)) {
       return alert(`${name} is already in contacts`);
     }
+
     this.setState(prevState => {
-      const { name, number, contacts } = prevState;
+      const { contacts } = prevState;
+      // const { name, number, contacts } = prevState;
+
       const newContact = {
         id: nanoid(),
-        name: name,
-        number: number,
+        name,
+        number,
+        // name: name,
+        // number: number,
       };
+
       return { contacts: [newContact, ...contacts], name: '', number: '' };
     });
   };
@@ -70,8 +79,8 @@ export class App extends Component {
   }
 
   render() {
-    const { handlChange, addContact, removeContact } = this;
-    const { name, number } = this.state;
+    const { handlFilter, addContact, removeContact } = this;
+    // const { name, number } = this.state;
     const contacts = this.getFilterContacts();
 
     return (
@@ -86,8 +95,8 @@ export class App extends Component {
       <div className={styles.wrapper}>
         <div className={styles.block}>
           <h1 className={styles.title}>Phonebook</h1>
-
-          <form action="" onSubmit={addContact}>
+          <PhoneBookForm onSubmit={addContact} />
+          {/* <form action="" onSubmit={addContact}>
             <div className={styles.formGroup}>
               <label htmlFor="">Name</label>
               <input
@@ -115,12 +124,12 @@ export class App extends Component {
             </div>
 
             <button type="submit">Add contact</button>
-          </form>
+          </form> */}
         </div>
 
         <div className={styles.block}>
           <h2 className={styles.title}>Contacts</h2>
-          <div className={styles.formGroup}>
+          {/* <div className={styles.formGroup}>
             <label htmlFor="">Find contacts by name</label>
             <input
               onChange={handlChange}
@@ -130,7 +139,8 @@ export class App extends Component {
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
             />
-          </div>
+          </div> */}
+          <PhoneBookFilter handlChange={handlFilter} />
           <ContactList removeContact={removeContact} contacts={contacts} />
         </div>
       </div>
