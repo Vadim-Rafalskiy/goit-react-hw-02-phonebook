@@ -21,3 +21,11 @@
 .title {
   text-align: center;
 }
+
+.contactItem:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.btnDelete {
+  margin-left: 15px;
+}

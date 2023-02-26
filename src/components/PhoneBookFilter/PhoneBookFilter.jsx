@@ -1,11 +1,13 @@
+import PropTypes from 'prop-types';
+
 import styles from '../App.module.css';
 
-const PhoneBookFilter = ({ handlChange }) => {
+const PhoneBookFilter = ({ handleChange }) => {
   return (
     <div className={styles.formGroup}>
       <label htmlFor="">Find contacts by name</label>
       <input
-        onChange={handlChange}
+        onChange={handleChange}
         type="text"
         name="filter"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -17,3 +19,7 @@ const PhoneBookFilter = ({ handlChange }) => {
 };
 
 export default PhoneBookFilter;
+
+PhoneBookFilter.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+};

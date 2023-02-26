@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import PropTypes from 'prop-types';
 
 import styles from '../App.module.css';
@@ -13,6 +14,10 @@ class PhoneBookForm extends Component {
     e.preventDefault();
     const { onSubmit } = this.props;
     onSubmit({ ...this.state });
+    this.reset();
+  };
+
+  reset = () => {
     this.setState({
       name: '',
       number: '',
